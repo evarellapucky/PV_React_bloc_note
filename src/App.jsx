@@ -74,31 +74,32 @@ const App = () => {
       <br />
       <div className='d-flex notes'>
         <div className="col-md-4 mes__notes">
-          <SavedNotes savedNotes={savedNotes} onNoteEdit={handleNoteEdit} onNoteDelete={handleNoteDelete} onNoteClick={handleNoteClick} />
-          <button className='btn btn-primary' onClick={() => setShowNewNoteForm(true)}>Créer une nouvelle note</button>
+        <button className='btn btn-primary mb-4' onClick={() => setShowNewNoteForm(true)}>Créer une nouvelle note</button>
+        <SavedNotes savedNotes={savedNotes} onNoteEdit={handleNoteEdit} onNoteDelete={handleNoteDelete} onNoteClick={handleNoteClick} />
+          
         </div>
         <div className="col-md-8 nouvelle__note">
-  {/* Afficher le formulaire si showNewNoteForm est vrai */}
-  {showNewNoteForm && (
-    <div className="new__formulaire">
-      <MarkdownInput onTextareaChange={handleTextareaChange} onNoteSave={handleNoteSave} onTitleChange={handleTitleChange} />
-    </div>
-  )}
+          {/* Afficher le formulaire si showNewNoteForm est vrai */}
+          {showNewNoteForm && (
+            <div className="new__formulaire">
+              <MarkdownInput onTextareaChange={handleTextareaChange} onNoteSave={handleNoteSave} onTitleChange={handleTitleChange} />
+            </div>
+          )}
 
-  {/* Afficher NoteDisplay si markdownValue est défini et showNewNoteForm est faux */}
-  {markdownValue && !showNewNoteForm && (
-    <div className="new__affichage">
-      <NoteDisplay markdownValue={markdownValue} titleValue={titleValue} />
-    </div>
-  )}
+          {/* Afficher NoteDisplay si markdownValue est défini et showNewNoteForm est faux */}
+          {markdownValue && !showNewNoteForm && (
+            <div className="new__affichage">
+              <NoteDisplay markdownValue={markdownValue} titleValue={titleValue} />
+            </div>
+          )}
 
-  {/* Afficher le contenu de la note sélectionnée si selectedNoteIndex est défini et showNewNoteForm est faux */}
-  {selectedNoteIndex !== null && !markdownValue && !showNewNoteForm && (
-    <div className="new__affichage">
-      <NoteDisplay markdownValue={savedNotes[selectedNoteIndex].content} titleValue={savedNotes[selectedNoteIndex].title} />
-    </div>
-  )}
-</div>
+          {/* Afficher le contenu de la note sélectionnée si selectedNoteIndex est défini et showNewNoteForm est faux */}
+          {selectedNoteIndex !== null && !markdownValue && !showNewNoteForm && (
+            <div className="new__affichage__bis">
+              <NoteDisplay markdownValue={savedNotes[selectedNoteIndex].content} titleValue={savedNotes[selectedNoteIndex].title} />
+            </div>
+          )}
+        </div>
       </div>
     </>
   );
