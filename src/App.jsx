@@ -13,7 +13,7 @@ const App = () => {
   const [showNewNoteForm, setShowNewNoteForm] = useState(false);
   const [selectedNoteIndex, setSelectedNoteIndex] = useState(null);
 
-  // Récupérer les données du localStorage lors du montage initial
+  // Récupérer les données du localStorage lors du montage initial de l'appli
   useEffect(() => {
     const savedNotesFromLocalStorage = JSON.parse(localStorage.getItem('savedNotes'));
     if (savedNotesFromLocalStorage) {
@@ -21,6 +21,7 @@ const App = () => {
     }
   }, []);
 
+  //fonction appelée quand on clique sur une note : màj titleValue, markdownValue, selectedNoteIndex
   const handleNoteClick = (index) => {
     // Mettre à jour l'état avec le contenu complet de la note sélectionnée
     setTitleValue(savedNotes[index].title);
@@ -28,10 +29,12 @@ const App = () => {
     setSelectedNoteIndex(index);
   };
   
+  //màj markdownValue quand on modifie le texte ds la zone de texte
   const handleTextareaChange = (value) => {
     setMarkdownValue(value);
   };
 
+  //idem pour le titre
   const handleTitleChange = (value) => {
     setTitleValue(value)
   }
@@ -40,22 +43,22 @@ const App = () => {
   const handleNoteSave = (title, content) => {
     // Convertir le contenu markdown en HTML avant de l'ajouter aux notes enregistrées
     const converter = new Showdown.Converter();
-    const htmlContent = converter.makeHtml(content);
-    
+    const htmlContent = converter.makeHtml(content); 
     // Créer un nouvel objet représentant la nouvelle note avec le titre et le contenu HTML
-    const newNote = { title, content: htmlContent };
-    
+    const newNote = { title, content: htmlContent };  
     // Ajouter la nouvelle note à la liste des notes enregistrées
     setSavedNotes(prevNotes => [...prevNotes, newNote]);
     setShowNewNoteForm(false);
   };
 
+  //fonction appelée lorsque l'utilisateur édite une note. Màj liste de notes sauvegardées avec la not modifiée
   const handleNoteEdit = (index, updatedNote) => {
     const updatedNotes = [...savedNotes];
     updatedNotes[index] = updatedNote;
     setSavedNotes(updatedNotes);
   };
   
+  //fonction utilisée pour supprimer la note. Filtre les notes sauvegardées pour exclure la note supprimée
   const handleNoteDelete = (index) => {
     const updatedNotes = savedNotes.filter((_, i) => i !== index);
     setSavedNotes(updatedNotes);

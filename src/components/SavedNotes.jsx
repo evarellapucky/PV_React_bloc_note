@@ -7,13 +7,13 @@ const SavedNotes = ({ savedNotes, onNoteEdit, onNoteDelete, onNoteClick }) => {
   const [editingIndex, setEditingIndex] = useState(null);
   const [editedNote, setEditedNote] = useState({ title: '', content: '' });
 
-  // fonction appelée uand on clique sur le btn modifier : màj de l'editingindex avec l'index de la note en cours 'édition et l'état editNote avec les données de la note
+  // fonction appelée quand on clique sur le btn modifier : màj de l'editingindex avec l'index de la note en cours d'édition et l'état editNote avec les données de la note
   const handleEditClick = (index) => {
     setEditingIndex(index);
     setEditedNote(savedNotes[index]);
   };
 
-  //fonction appelée quand on enregistré la note modifiée. Appelle la fction de rappel onNoteEdit ac index de la note + données modifiées, puis elle reset les données de setEditednote
+  //fonction appelée quand on enregistre la note modifiée. Appelle la fction de rappel onNoteEdit ac index de la note + données modifiées, puis elle reset les données de setEditednote
   const handleSaveEdit = () => {
     onNoteEdit(editingIndex, editedNote);
     setEditingIndex(null);

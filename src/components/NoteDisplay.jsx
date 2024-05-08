@@ -3,7 +3,6 @@ import Showdown from 'showdown';
 const NoteDisplay = ({ titleValue, markdownValue }) => {
   //on instancie le convertisseur showdown markdown => html
   const converter = new Showdown.Converter();
-
   // conversion du Markdown en HTML
   const htmlContent = converter.makeHtml(markdownValue);
 
